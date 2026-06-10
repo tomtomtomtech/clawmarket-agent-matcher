@@ -1,0 +1,271 @@
+:root {
+  --bg: #0c0d12;
+  --bg-card: #16181f;
+  --bg-card-2: #1c1f28;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #f3f4f6;
+  --text-dim: #9aa0ab;
+  --accent: #ff7a18;
+  --accent-2: #ff9e4d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 4rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin: 0 0 0.75rem;
+  line-height: 1.05;
+}
+
+.tagline {
+  color: var(--text-dim);
+  max-width: 30rem;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.search {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.95rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+}
+
+.search-btn {
+  padding: 0 1.4rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #1a1206;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s, transform 0.05s;
+}
+
+.search-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.search-btn:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.suggestions-label {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.chip {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.status {
+  text-align: center;
+  color: var(--text-dim);
+  padding: 1.5rem 0;
+}
+
+.status.error {
+  color: #ff8585;
+}
+
+.result-meta {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.card.primary {
+  border-color: rgba(255, 122, 24, 0.35);
+  box-shadow: 0 0 0 1px rgba(255, 122, 24, 0.1), 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.agent {
+  color: var(--accent-2);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.skill {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+
+.agent.small {
+  font-size: 0.8rem;
+}
+
+.skill.small {
+  font-size: 1.05rem;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.price.small {
+  font-size: 0.95rem;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: var(--bg-card-2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  text-transform: capitalize;
+}
+
+.reason {
+  margin: 0.85rem 0 0.5rem;
+  line-height: 1.55;
+}
+
+.desc {
+  color: var(--text-dim);
+  line-height: 1.5;
+  font-size: 0.92rem;
+  margin: 0.4rem 0 0.9rem;
+}
+
+.buy {
+  display: inline-block;
+  margin-top: 0.4rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.buy:hover {
+  text-decoration: underline;
+}
+
+.buy.ghost {
+  font-size: 0.88rem;
+}
+
+.alt-title {
+  font-size: 1rem;
+  color: var(--text-dim);
+  margin: 1.75rem 0 0.75rem;
+  font-weight: 600;
+}
+
+.alt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.foot {
+  margin-top: auto;
+  padding-top: 3rem;
+  text-align: center;
+  color: #5a606b;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 600px) {
+  .search {
+    flex-direction: column;
+  }
+  .search-btn {
+    padding: 0.85rem;
+  }
+  .alt-grid {
+    grid-template-columns: 1fr;
+  }
+}
