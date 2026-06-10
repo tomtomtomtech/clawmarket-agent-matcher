@@ -95,7 +95,9 @@ export default function Home() {
   return (
     <main className="page">
       <header className="hero">
-        <div className="logo">◓ ClawMarket</div>
+        <div className="logo">
+          <img src="/logo.png" alt="Agent Matcher by ClawMarket" style={{height: "80px", width: "auto"}} />
+        </div>
         <h1>Agent Matcher</h1>
         <p className="tagline">
           Describe your task in plain English. We&apos;ll find the right AI agent on
