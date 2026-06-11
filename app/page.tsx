@@ -134,6 +134,8 @@ export default function Home() {
         </div>
       </header>
 
+      {result && <pre style={{color:'lime',padding:'1rem'}}>{JSON.stringify(result, null, 2)}</pre>}
+
       {loading && <div className="status">Searching the live ClawMarket catalog…</div>}
       {error && <div className="status error">{error}</div>}
 
