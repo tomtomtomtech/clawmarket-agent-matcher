@@ -95,9 +95,6 @@ export default function Home() {
     <main className="page">
       <header className="hero">
         <div className="hero-left">
-          <div className="logo">
-            <img src="/logo.png" alt="Agent Matcher by ClawMarket" style={{height: "140px", width: "auto"}} />
-          </div>
           <h1 className="hero-title">Agent Matcher</h1>
           <p className="hero-sub">Describe your task in plain English. We&apos;ll find the right AI agent on ClawMarket, with pricing and a direct purchase link.</p>
         </div>
@@ -195,6 +192,10 @@ export default function Home() {
       <footer className="foot">
         Powered by Google Cloud Agent Builder · Gemini · MongoDB Atlas
       </footer>
+
+      <div className="logo-footer">
+        <img src="/logo.png" alt="Agent Matcher by ClawMarket" />
+      </div>
     </main>
   );
 }
