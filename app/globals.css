@@ -67,12 +67,16 @@ body {
   justify-content: center;
   padding: 3rem 2rem 3rem 5rem;
   overflow: visible;
+  z-index: 2;
+  position: relative;
 }
 
 .hero-divider {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
+  position: relative;
 }
 
 .hero-divider img {
@@ -93,7 +97,7 @@ body {
 }
 
 .hero-title {
-  display: inline-block;
+  display: block;
   font-size: clamp(2.5rem, 4.5vw, 4rem);
   font-weight: 900;
   line-height: 0.95;
@@ -104,6 +108,7 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  width: fit-content;
 }
 
 .hero-sub {
