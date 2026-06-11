@@ -303,6 +303,39 @@ body {
 }
 
 @media (max-width: 600px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 3rem 0;
+    gap: 2rem;
+  }
+  .hero-left {
+    align-items: center;
+    text-align: center;
+    padding: 0;
+  }
+  .hero-sub {
+    max-width: none;
+  }
+  .hero-divider {
+    height: 2px;
+  }
+  .hero-divider::before {
+    top: 50%;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #7c3aed, #a78bfa, transparent);
+    transform: skewY(-3deg);
+  }
+  .hero-right {
+    padding: 0;
+  }
+  .logo img {
+    height: 110px;
+  }
   .search {
     flex-direction: column;
   }
