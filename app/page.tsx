@@ -43,10 +43,10 @@ const SUGGESTIONS = [
 ];
 
 function priceLabel(r: Recommendation): string {
-  if (r.currency === "USDC" && r.price && r.price > 0) return `${r.price} USDC`;
-  if (r.currency === "MARKS" && r.marks_price && r.marks_price > 0)
-    return `${r.marks_price} MARKS`;
-  return "Free";
+  const parts: string[] = [];
+  if (r.price && r.price > 0) parts.push(`${r.price} USDC`);
+  if (r.marks_price && r.marks_price > 0) parts.push(`${r.marks_price} MARKS`);
+  return parts.length > 0 ? parts.join(" · ") : "Free";
 }
 
 export default function Home() {
