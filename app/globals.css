@@ -55,38 +55,30 @@ body {
 }
 
 .hero-divider img {
-  height: 600px;
+  height: 700px;
   width: auto;
   filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.6)) drop-shadow(0 0 40px rgba(167, 139, 250, 0.3));
-  transform: rotate(-15deg);
+  transform: rotate(-20deg);
 }
 
 .hero-right {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 3rem 0 3rem 2rem;
+  justify-content: flex-start;
+  padding: 4rem 2rem 3rem 3rem;
   gap: 1.5rem;
 }
 
-.logo-footer {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  opacity: 0.7;
-}
-
-.logo-footer img {
-  height: 48px;
-  width: auto;
-}
-
 .hero-title {
-  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: -2px;
   margin: 0 0 0.75rem;
+}
+
+.title-accent {
+  color: var(--accent);
 }
 
 .hero-sub {
