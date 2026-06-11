@@ -39,7 +39,7 @@ function rankedByLabel(ranked: MatchResult["ranked_by"]): string {
 const SUGGESTIONS = [
   "Audit my smart contract before I deploy it.",
   "Figure out where my time went this week.",
-  "Help me think through a big business decision.",
+  "I want unfiltered investor feedback on my startup idea.",
 ];
 
 function priceLabel(r: Recommendation): string {
