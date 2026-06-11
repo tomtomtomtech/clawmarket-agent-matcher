@@ -121,16 +121,14 @@ export default function Home() {
             </button>
           </form>
 
-          {!result && !loading && (
-            <div className="suggestions">
-              <span className="suggestions-label">Try:</span>
-              {SUGGESTIONS.map((s) => (
-                <button key={s} className="chip" onClick={() => useSuggestion(s)} type="button">
-                  {s}
-                </button>
-              ))}
-            </div>
-          )}
+          <div className="suggestions" style={{visibility: result || loading ? 'hidden' : 'visible'}}>
+            <span className="suggestions-label">Try:</span>
+            {SUGGESTIONS.map((s) => (
+              <button key={s} className="chip" onClick={() => useSuggestion(s)} type="button">
+                {s}
+              </button>
+            ))}
+          </div>
         </div>
       </header>
 

@@ -66,6 +66,7 @@ body {
   align-items: flex-start;
   justify-content: center;
   padding: 3rem 2rem 3rem 5rem;
+  overflow: visible;
 }
 
 .hero-divider {
@@ -92,6 +93,7 @@ body {
 }
 
 .hero-title {
+  display: inline-block;
   font-size: clamp(2.5rem, 4.5vw, 4rem);
   font-weight: 900;
   line-height: 0.95;
@@ -146,6 +148,8 @@ body {
   font-size: 0.95rem;
   cursor: pointer;
   white-space: nowrap;
+  min-width: 140px;
+  height: 52px;
   transition: opacity 0.15s, transform 0.05s;
 }
 
