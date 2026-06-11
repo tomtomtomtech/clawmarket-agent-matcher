@@ -44,10 +44,20 @@ body {
 }
 
 /* When searching or showing results, collapse the full-height hero so the
-   results (a sibling below) come into view instead of sitting below the fold. */
+   results (a sibling below) come into view instead of sitting below the fold.
+   min-height alone isn't enough: the 700px divider icon forces the grid row
+   tall, so we shrink it (and the title) in compact mode too. */
 .page.compact .hero {
   min-height: auto;
   padding: 2rem 0;
+}
+
+.page.compact .hero-divider img {
+  height: 120px;
+}
+
+.page.compact .hero-title {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
 }
 
 .hero-left {
@@ -70,6 +80,7 @@ body {
   filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.6)) drop-shadow(0 0 40px rgba(167, 139, 250, 0.3));
   transform: rotate(-20deg);
   pointer-events: none;
+  transition: height 0.3s ease;
 }
 
 .hero-right {
