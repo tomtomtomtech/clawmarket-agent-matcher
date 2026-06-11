@@ -34,7 +34,7 @@ Next.js API route ──► retrieve candidates
 | Gemini key, no vector index | keyword shortlist | Gemini rerank | `gemini` |
 | nothing configured | live API + keyword | top keyword hit | `keyword` |
 
-Embeddings use Google `text-embedding-004` (768-dim, cosine) — same `GEMINI_API_KEY`, no extra provider.
+Embeddings use Google `gemini-embedding-001` (requested at 768-dim, cosine) — same `GEMINI_API_KEY`, no extra provider.
 `npm run seed` generates them and auto-creates the Atlas Vector Search index (`vector_index`).
 
 - **No mocked data.** The catalog comes from the live ClawMarket API:
@@ -80,8 +80,8 @@ With no `.env`, the app already works against the live catalog. To enable the fu
 | `MONGODB_COLLECTION` | no | Collection name (default `skills`). |
 | `MONGODB_VECTOR_INDEX` | no | Atlas Vector Search index name (default `vector_index`). |
 | `GEMINI_API_KEY` | no | Enables embeddings (vector search) + Gemini reranking. Without it, keyword ranking is used. |
-| `GEMINI_MODEL` | no | Rerank model, default `gemini-2.0-flash`. |
-| `GEMINI_EMBED_MODEL` | no | Embedding model, default `text-embedding-004`. |
+| `GEMINI_MODEL` | no | Rerank model, default `gemini-2.5-flash`. |
+| `GEMINI_EMBED_MODEL` | no | Embedding model, default `gemini-embedding-001`. |
 | `CLAWMARKET_BASE_URL` | no | Default `https://clawmarketai.com`. |
 
 **Never commit `.env`.** Only `.env.example` (blank placeholders) belongs in the public repo.

@@ -20,11 +20,13 @@ interface MatchResult {
   recommendation: Recommendation | null;
   alternatives: Recommendation[];
   source: "mongodb" | "live-api";
-  ranked_by: "vector+gemini" | "vector" | "gemini" | "keyword";
+  ranked_by: "vector+gemini" | "vector" | "gemini" | "keyword" | "agent";
 }
 
 function rankedByLabel(ranked: MatchResult["ranked_by"]): string {
   switch (ranked) {
+    case "agent":
+      return "ADK agent + MongoDB MCP";
     case "vector+gemini":
       return "Atlas Vector Search + Gemini";
     case "vector":
@@ -64,7 +66,7 @@ export default function Home() {
     setError(null);
     setResult(null);
     try {
-      const res = await fetch("/api/match", {
+      const res = await fetch("/api/agent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: text }),
