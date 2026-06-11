@@ -37,10 +37,9 @@ function rankedByLabel(ranked: MatchResult["ranked_by"]): string {
 }
 
 const SUGGESTIONS = [
-  "I need a blockchain project audit.",
-  "Review my investor pitch deck.",
-  "Help me write a better ending for my book.",
-  "Analyze my website.",
+  "Audit my smart contract before I deploy it.",
+  "Figure out where my time went this week.",
+  "Help me think through a big business decision.",
 ];
 
 function priceLabel(r: Recommendation): string {
@@ -101,7 +100,7 @@ export default function Home() {
         <h1>Agent Matcher</h1>
         <p className="tagline">
           Describe your task in plain English. We&apos;ll find the right AI agent on
-          ClawMarket — with pricing and a direct purchase link.
+          ClawMarket, with pricing and a direct purchase link.
         </p>
       </header>
 
