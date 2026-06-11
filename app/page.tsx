@@ -91,8 +91,10 @@ export default function Home() {
 
   const rec = result?.recommendation;
 
+  const compact = loading || result !== null;
+
   return (
-    <main className="page">
+    <main className={compact ? "page compact" : "page"}>
       <header className="hero">
         <div className="hero-left">
           <h1 className="hero-title">Agent Matcher</h1>

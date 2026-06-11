@@ -39,6 +39,14 @@ body {
   min-height: 100vh;
   gap: 0;
   padding: 0;
+  transition: min-height 0.3s ease;
+}
+
+/* When searching or showing results, collapse the full-height hero so the
+   results (a sibling below) come into view instead of sitting below the fold. */
+.page.compact .hero {
+  min-height: auto;
+  padding: 2rem 0;
 }
 
 .hero-left {
