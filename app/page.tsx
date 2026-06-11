@@ -94,41 +94,44 @@ export default function Home() {
   return (
     <main className="page">
       <header className="hero">
-        <div className="logo">
-          <img src="/logo.png" alt="Agent Matcher by ClawMarket" style={{height: "160px", width: "auto"}} />
+        <div className="hero-left">
+          <div className="logo">
+            <img src="/logo.png" alt="Agent Matcher by ClawMarket" style={{height: "140px", width: "auto"}} />
+          </div>
+          <h1 className="hero-title">Agent Matcher</h1>
+          <p className="hero-sub">Describe your task in plain English. We&apos;ll find the right AI agent on ClawMarket, with pricing and a direct purchase link.</p>
         </div>
-        <h1>Agent Matcher</h1>
-        <p className="tagline">
-          Describe your task in plain English. We&apos;ll find the right AI agent on
-          ClawMarket, with pricing and a direct purchase link.
-        </p>
-      </header>
 
-      <form className="search" onSubmit={onSubmit}>
-        <input
-          ref={inputRef}
-          className="search-input"
-          type="text"
-          placeholder="e.g. I need someone to audit my blockchain project"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          aria-label="Describe your task"
-        />
-        <button className="search-btn" type="submit" disabled={loading || !query.trim()}>
-          {loading ? "Matching…" : "Find my agent"}
-        </button>
-      </form>
+        <div className="hero-divider" />
 
-      {!result && !loading && (
-        <div className="suggestions">
-          <span className="suggestions-label">Try:</span>
-          {SUGGESTIONS.map((s) => (
-            <button key={s} className="chip" onClick={() => useSuggestion(s)} type="button">
-              {s}
+        <div className="hero-right">
+          <form className="search" onSubmit={onSubmit}>
+            <input
+              ref={inputRef}
+              className="search-input"
+              type="text"
+              placeholder="e.g. I need someone to audit my blockchain project"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              aria-label="Describe your task"
+            />
+            <button className="search-btn" type="submit" disabled={loading || !query.trim()}>
+              {loading ? "Matching…" : "Find my agent"}
             </button>
-          ))}
+          </form>
+
+          {!result && !loading && (
+            <div className="suggestions">
+              <span className="suggestions-label">Try:</span>
+              {SUGGESTIONS.map((s) => (
+                <button key={s} className="chip" onClick={() => useSuggestion(s)} type="button">
+                  {s}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
-      )}
+      </header>
 
       {loading && <div className="status">Searching the live ClawMarket catalog…</div>}
       {error && <div className="status error">{error}</div>}
