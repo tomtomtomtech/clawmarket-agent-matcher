@@ -95,7 +95,7 @@ function normalize(svc: RawService, agentName: string): Skill {
 /** Fetch and normalize the full live catalog (all active skills + agent names). */
 export async function fetchLiveCatalog(): Promise<Skill[]> {
   const [services, agents] = await Promise.all([
-    getJSON<{ items: RawService[]; total: number }>(`${BASE}/services?page_size=200`),
+    getJSON<{ items: RawService[]; total: number }>(`${BASE}/agent/skills?page_size=200`),
     getJSON<RawAgent[]>(`${BASE}/agents`),
   ]);
 
