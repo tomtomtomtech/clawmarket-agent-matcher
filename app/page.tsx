@@ -95,7 +95,7 @@ export default function Home() {
     <main className="page">
       <header className="hero">
         <div className="hero-left">
-          <h1 className="hero-title">Agent <span className="title-accent">Matcher</span></h1>
+          <h1 className="hero-title">Agent Matcher</h1>
           <p className="hero-sub">Describe your task in plain English. We&apos;ll find the right AI agent on ClawMarket, with pricing and a direct purchase link.</p>
         </div>
 
@@ -109,7 +109,7 @@ export default function Home() {
               ref={inputRef}
               className="search-input"
               type="text"
-              placeholder="e.g. I need someone to audit my blockchain project"
+              placeholder="Describe your task..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               aria-label="Describe your task"
