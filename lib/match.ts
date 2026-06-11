@@ -63,13 +63,16 @@ async function getCandidates(): Promise<{ skills: Skill[]; source: "mongodb" | "
     try {
       const coll = await skillsCollection();
       const skills = await coll.find({}, { projection: { _id: 0 } }).toArray();
+      console.log(`[match] mongo catalog fetch returned ${skills.length} skills`);
       if (skills.length > 0) return { skills, source: "mongodb" };
     } catch (err) {
       console.error("Mongo read failed, falling back to live API:", err);
     }
   }
   // Fallback keeps the demo real: pull the live catalog directly.
-  return { skills: await fetchLiveCatalog(), source: "live-api" };
+  const liveSkills = await fetchLiveCatalog();
+  console.log(`[match] live-api catalog fetch returned ${liveSkills.length} skills`);
+  return { skills: liveSkills, source: "live-api" };
 }
 
 /**
@@ -196,6 +199,7 @@ Respond with ONLY a JSON object, no markdown, in this exact shape:
 export async function match(query: string): Promise<MatchResult> {
   const trimmed = query.trim();
   const queryTokens = tokenize(trimmed);
+  console.log(`[match] query="${trimmed}" tokens=[${queryTokens.join(", ")}]`);
 
   // 1. Prefer Atlas Vector Search (semantic). Fall back to keyword retrieval.
   const vector = await vectorCandidates(trimmed);
@@ -207,6 +211,7 @@ export async function match(query: string): Promise<MatchResult> {
     shortlist = vector.slice(0, 6);
     source = "mongodb";
     retrievedByVector = true;
+    console.log(`[match] vector search returned ${vector.length} candidates; top="${vector[0]?.skill_name}"`);
   } else {
     const candidates = await getCandidates();
     source = candidates.source;
@@ -216,6 +221,16 @@ export async function match(query: string): Promise<MatchResult> {
       .map((s) => ({ skill: s, score: scoreSkill(queryTokens, s) }))
       .sort((a, b) => b.score - a.score);
 
+    const matchedCount = ranked.filter((r) => r.score > 0).length;
+    console.log(
+      `[match] keyword scored ${ranked.length} skills; ${matchedCount} with score>0; ` +
+        `top score=${ranked[0]?.score ?? 0} skill="${ranked[0]?.skill.skill_name ?? "(none)"}"`,
+    );
+    console.log(
+      "[match] top 3:",
+      ranked.slice(0, 3).map((r) => `${r.skill.skill_name} (${r.score})`).join(" | "),
+    );
+
     // If nothing matched any keyword, still surface the top few so the user
     // gets a graceful answer instead of an empty screen.
     shortlist = (ranked[0]?.score > 0 ? ranked.filter((r) => r.score > 0) : ranked)
@@ -223,7 +238,10 @@ export async function match(query: string): Promise<MatchResult> {
       .map((r) => r.skill);
   }
 
+  console.log(`[match] shortlist size=${shortlist.length}`);
+
   if (shortlist.length === 0) {
+    console.log("[match] no candidates -> returning null recommendation");
     return {
       query: trimmed,
       recommendation: null,
@@ -254,6 +272,8 @@ export async function match(query: string): Promise<MatchResult> {
     .filter((s) => s.skill_id !== top.skill_id)
     .slice(0, 3)
     .map((s) => toRecommendation(s, fallbackReason(s, queryTokens)));
+
+  console.log(`[match] result: top="${top.skill_name}" ranked_by=${ranked_by} gemini=${pick ? "yes" : "no"}`);
 
   return {
     query: trimmed,

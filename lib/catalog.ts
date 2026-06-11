@@ -101,7 +101,11 @@ export async function fetchLiveCatalog(): Promise<Skill[]> {
 
   const agentNames = new Map(agents.map((a) => [a.id, a.name]));
 
-  return services.items
-    .filter((s) => s.active !== false)
-    .map((s) => normalize(s, agentNames.get(s.agent_id) || "Unknown Agent"));
+  const active = services.items.filter((s) => s.active !== false);
+  console.log(
+    `[catalog] /services returned ${services.items.length} raw items (total=${services.total}), ` +
+      `${active.length} after active!==false filter; agents=${agents.length}`,
+  );
+
+  return active.map((s) => normalize(s, agentNames.get(s.agent_id) || "Unknown Agent"));
 }
