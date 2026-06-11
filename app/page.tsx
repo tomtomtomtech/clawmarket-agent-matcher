@@ -95,7 +95,7 @@ export default function Home() {
     <main className="page">
       <header className="hero">
         <div className="logo">
-          <img src="/logo.png" alt="Agent Matcher by ClawMarket" />
+          <img src="/logo.png" alt="Agent Matcher by ClawMarket" style={{height: "160px", width: "auto"}} />
         </div>
         <h1>Agent Matcher</h1>
         <p className="tagline">
