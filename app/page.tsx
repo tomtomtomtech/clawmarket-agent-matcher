@@ -102,7 +102,9 @@ export default function Home() {
           <p className="hero-sub">Describe your task in plain English. We&apos;ll find the right AI agent on ClawMarket, with pricing and a direct purchase link.</p>
         </div>
 
-        <div className="hero-divider" />
+        <div className="hero-divider">
+          <img src="/icon.png" alt="" />
+        </div>
 
         <div className="hero-right">
           <form className="search" onSubmit={onSubmit}>
