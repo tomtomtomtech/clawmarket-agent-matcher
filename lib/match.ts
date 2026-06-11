@@ -22,7 +22,7 @@ export interface MatchResult {
   recommendation: Recommendation | null;
   alternatives: Recommendation[];
   source: "mongodb" | "live-api";
-  ranked_by: "vector+gemini" | "vector" | "gemini" | "keyword";
+  ranked_by: "vector+gemini" | "vector" | "gemini" | "keyword" | "agent";
 }
 
 const STOPWORDS = new Set([
@@ -109,7 +109,7 @@ async function vectorCandidates(query: string): Promise<Skill[] | null> {
   }
 }
 
-function toRecommendation(skill: Skill, reason: string): Recommendation {
+export function toRecommendation(skill: Skill, reason: string): Recommendation {
   return {
     agent_name: skill.agent_name,
     skill_name: skill.skill_name,
@@ -143,7 +143,7 @@ async function geminiRerank(
 ): Promise<GeminiPick | null> {
   const key = process.env.GEMINI_API_KEY;
   if (!key) return null;
-  const model = process.env.GEMINI_MODEL || "gemini-2.0-flash";
+  const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
   const list = candidates.map((s) => ({
     skill_id: s.skill_id,

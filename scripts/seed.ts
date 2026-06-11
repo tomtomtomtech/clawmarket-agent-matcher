@@ -24,7 +24,7 @@ async function attachEmbeddings(skills: Skill[]): Promise<boolean> {
     console.log("  (GEMINI_API_KEY not set — skipping embeddings; vector search will be disabled)");
     return false;
   }
-  console.log("→ Generating embeddings (text-embedding-004)…");
+  console.log(`→ Generating embeddings (${process.env.GEMINI_EMBED_MODEL || "gemini-embedding-001"})…`);
   const inputs = skills.map(embedInput);
   const batchSize = 50;
   const vectors: number[][] = [];

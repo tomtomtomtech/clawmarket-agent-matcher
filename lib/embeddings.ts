@@ -1,8 +1,8 @@
 // Text embeddings via Google's embedding model (same GEMINI_API_KEY).
 // Used to populate Atlas Vector Search at seed time and to embed the query at match time.
 
-const EMBED_MODEL = process.env.GEMINI_EMBED_MODEL || "text-embedding-004";
-export const EMBED_DIMENSIONS = 768; // text-embedding-004 default
+const EMBED_MODEL = process.env.GEMINI_EMBED_MODEL || "gemini-embedding-001";
+export const EMBED_DIMENSIONS = 768; // requested via outputDimensionality
 
 function apiKey(): string | null {
   return process.env.GEMINI_API_KEY || null;
@@ -28,6 +28,7 @@ export async function embedText(text: string, taskType: TaskType): Promise<numbe
           model: `models/${EMBED_MODEL}`,
           content: { parts: [{ text }] },
           taskType,
+          outputDimensionality: EMBED_DIMENSIONS,
         }),
       },
     );
@@ -44,28 +45,25 @@ export async function embedText(text: string, taskType: TaskType): Promise<numbe
   }
 }
 
-/** Embed many documents in one call (batchEmbedContents). */
+/** Embed many documents. gemini-embedding-001 only supports single embedContent,
+ *  so we call it per-document with bounded concurrency. */
 export async function embedBatch(texts: string[]): Promise<number[][]> {
   const key = apiKey();
   if (!key) throw new Error("GEMINI_API_KEY is required to generate embeddings");
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${EMBED_MODEL}:batchEmbedContents?key=${key}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        requests: texts.map((text) => ({
-          model: `models/${EMBED_MODEL}`,
-          content: { parts: [{ text }] },
-          taskType: "RETRIEVAL_DOCUMENT",
-        })),
-      }),
-    },
-  );
-  if (!res.ok) {
-    throw new Error(`batchEmbedContents -> ${res.status}: ${await res.text()}`);
+
+  const results: number[][] = new Array(texts.length);
+  const CONCURRENCY = 5;
+  let cursor = 0;
+
+  async function worker() {
+    while (cursor < texts.length) {
+      const i = cursor++;
+      const vec = await embedText(texts[i], "RETRIEVAL_DOCUMENT");
+      if (!vec) throw new Error(`embedContent failed for document ${i}`);
+      results[i] = vec;
+    }
   }
-  const data = await res.json();
-  const embeddings: Array<{ values: number[] }> = data?.embeddings || [];
-  return embeddings.map((e) => e.values);
+
+  await Promise.all(Array.from({ length: Math.min(CONCURRENCY, texts.length) }, worker));
+  return results;
 }

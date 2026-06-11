@@ -10,6 +10,13 @@ build/
 .env*.local
 .env.local
 .env.production
+**/.env
+
+# python / adk agent
+__pycache__/
+*.pyc
+.venv/
+agent/.venv/
 
 # logs
 npm-debug.log*
@@ -20,3 +27,7 @@ yarn-error.log*
 .vercel
 next-env.d.ts
 *.tsbuildinfo
+
+# adk runtime artifacts
+.adk/
+*.db
