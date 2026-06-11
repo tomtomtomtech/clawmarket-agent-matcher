@@ -192,7 +192,7 @@ export default function Home() {
       )}
 
       <footer className="foot">
-        Powered by Google Cloud Agent Builder · Gemini · MongoDB Atlas
+        Powered by Google ADK · Gemini · MongoDB Atlas
       </footer>
     </main>
   );

@@ -37,7 +37,10 @@ body {
   display: grid;
   grid-template-columns: 1fr 60px 1fr;
   align-items: center;
-  min-height: 100vh;
+  /* Leave room below the full-height hero for the footer (its top padding +
+     text + the page's bottom padding ≈ 150px) so "Powered by…" stays visible
+     within the first viewport without scrolling. */
+  min-height: calc(100vh - 150px);
   gap: 0;
   padding: 0;
   transition: min-height 0.3s ease;
