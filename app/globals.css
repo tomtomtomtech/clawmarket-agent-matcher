@@ -80,7 +80,7 @@ body {
 }
 
 .hero-divider img {
-  height: 400px;
+  height: 500px;
   width: auto;
   filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.6)) drop-shadow(0 0 40px rgba(167, 139, 250, 0.3));
   transform: rotate(-20deg);
@@ -92,7 +92,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 3rem 4rem 3rem 2rem;
+  padding: 3rem 4rem 3rem 4rem;
   gap: 1.5rem;
 }
 
